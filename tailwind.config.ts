@@ -9,8 +9,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
-        helvita:["Helvita Neue","sans-serif"]
+        poppins:"var(--poppins)" ,
+        helvita:"var(--helvita)"
       },
     },
   },
