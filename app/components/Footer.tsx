@@ -44,7 +44,7 @@ function Footer() {
                 </div>
             </div>
             <div className="flex justify-between flex-wrap items-center">
-                <p className="text-[#838383] text-sm flex gap-7 items-center"><span className="flex gap-4 text-white"><MapPin/> Pakistan</span><p className="flex items-center gap-2"><Copyright size={15}/> Nike, Inc. 2022. All rights reserved.</p></p>
+                <p className="text-[#838383] text-sm flex gap-7 items-center"><span className="flex gap-4 text-white"><MapPin/> Pakistan</span><span className="flex items-center gap-2"><Copyright size={15}/> Nike, Inc. 2022. All rights reserved.</span></p>
                 <ul className="flex gap-5 flex-wrap">
                     <li className="text-[0.8em] text-[#737373]">Guides</li>
                     <li className="text-[0.8em] text-[#737373]">Terms & Sales</li>
