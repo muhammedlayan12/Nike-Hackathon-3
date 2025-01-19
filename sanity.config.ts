@@ -50,7 +50,7 @@ import {structureTool} from 'sanity/structure';
 import {schema} from './sanity/schemaTypes/';
 import {structure} from './sanity/structure';
  
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'lc1sx5h6';
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'l082xxzv';
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
 const apiVersion = '2023-01-01'; 
 
