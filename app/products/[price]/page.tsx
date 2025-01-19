@@ -6,7 +6,7 @@
     import { useState, useEffect } from "react";
     import { urlFor } from "../../../sanity/lib/image";
     import Image from "next/image";
-    import Link from "next/link";
+ 
     import Header from "../../components/Header";
     import Navbar from "../../components/Navbar";
     import Footer from "../../components/Footer";
@@ -47,6 +47,7 @@
       }, [price]);
       
       
+       
 
       return (
         <div>
@@ -92,7 +93,7 @@
               </div>
               <div className="flex">
                 <span className="title-font font-medium text-2xl text-gray-900">${isProducts[0]?.price}</span>
-                <button className="flex ml-auto text-white bg-black border-0 py-2 px-6 focus:outline-none  rounded">
+                <button   className="flex ml-auto text-white bg-black border-0 py-2 px-6 focus:outline-none  rounded"  >
                   Add to Cart
                 </button>
               </div>

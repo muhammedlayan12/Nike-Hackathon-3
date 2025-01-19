@@ -9,59 +9,131 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 function page() {
- const [isProducts,setIsProducts] = useState<any[]>([]);
- const [sortBy, setSortBy] = useState("");
- const [activeStatus, setActiveStatus] = useState<string | null>(null);
- const [activeCategory, setActiveCategory] = useState<string | null>(null);
- const [isActiveColor , setIsActiveColor] = useState<string | null>(null);
- const [searchTerm, setSearchTerm] = useState("");
- const [isAlertShow,setIsAlertShow] = useState(false);
+//  const [isProducts,setIsProducts] = useState<any[]>([]);
+//  const [sortBy, setSortBy] = useState("");
+//  const [activeStatus, setActiveStatus] = useState<string | null>(null);
+//  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+//  const [isActiveColor , setIsActiveColor] = useState<string | null>(null);
+//  const [searchTerm, setSearchTerm] = useState("");
+//  const [isAlertShow,setIsAlertShow] = useState(false);
 
 
 
+ 
 
 
- const showResetAlert = ()=>{
-  setIsAlertShow(!isAlertShow);
-  setTimeout(() => {
-    setIsAlertShow(false);
-  }, 1500);
-}
+//  const showResetAlert = ()=>{
+//   setIsAlertShow(!isAlertShow);
+//   setTimeout(() => {
+//     setIsAlertShow(false);
+//   }, 1500);
+// }
 
   
   
-  useEffect(()=>{
-    async function getData(){
-      const query = `
-  *[_type=="product"]{
-      productName,category,price,inventory,colors,status,image,description
-  }`;
+//   useEffect(()=>{
+//     async function getData(){
+//       const query = `
+//   *[_type=="product"]{
+//       productName,category,price,inventory,colors,status,image,description
+//   }`;
   
-  const responce = await client.fetch(query);
-  console.log(responce);
-  setIsProducts(responce);
+//   const responce = await client.fetch(query);
+//   console.log(responce);
+//   setIsProducts(responce);
+//     }
+//   getData();
+//   },[])
+
+
+//   const sortedProducts = [...isProducts].sort((a, b) =>
+//     sortBy === "lowToHigh" ? a.price - b.price : sortBy === "highToLow" ? b.price - a.price : 0
+//   );
+  
+//   const handleSort = (order: string) => setSortBy(order);
+
+   
+//   const filteredProducts = sortedProducts.filter((product) => {
+  
+//     const matchesSearch = product.productName?.toLowerCase().includes(searchTerm.toLowerCase());
+//     const matchesCategory = activeCategory ? product.category == activeCategory : true;
+//     const matchesStatus = activeStatus ? product.status === activeStatus : true;
+//     const matchesColor = isActiveColor ? product.colors.includes(isActiveColor) : true;
+//     return matchesSearch && matchesStatus && matchesCategory && matchesColor;
+//   });
+
+
+
+
+const [isProducts, setIsProducts] = useState<any[]>([]);
+  const [sortBy, setSortBy] = useState("");
+  const [activeStatus, setActiveStatus] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [isActiveColor, setIsActiveColor] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isAlertShow, setIsAlertShow] = useState(false);
+
+  
+  const showResetAlert = () => {
+    setIsAlertShow(!isAlertShow);
+    setTimeout(() => {
+      setIsAlertShow(false);
+    }, 1500);
+  };
+
+ 
+  useEffect(() => {
+    async function getData() {
+      const query = `*[_type=="product"]{
+          productName,category,price,inventory,colors,status,image,description
+        }`;
+
+      const response = await client.fetch(query);
+      setIsProducts(response);
     }
-  getData();
-  },[])
+    getData();
+  }, []);
 
-
+   
   const sortedProducts = [...isProducts].sort((a, b) =>
     sortBy === "lowToHigh" ? a.price - b.price : sortBy === "highToLow" ? b.price - a.price : 0
   );
-  
+
   const handleSort = (order: string) => setSortBy(order);
 
-   
-  const filteredProducts = sortedProducts.filter((product) => {
   
-    const matchesSearch = product.productName?.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = activeCategory ? product.category == activeCategory : true;
+  const filteredProducts = sortedProducts.filter((product) => {
+    const matchesSearch = product.productName
+      ?.toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesCategory = activeCategory ? product.category === activeCategory : true;
     const matchesStatus = activeStatus ? product.status === activeStatus : true;
     const matchesColor = isActiveColor ? product.colors.includes(isActiveColor) : true;
     return matchesSearch && matchesStatus && matchesCategory && matchesColor;
   });
 
+ 
+  const addToCart = (product: any) => {
   
+    const cart = JSON.parse(localStorage.getItem("carts") || "[]");
+    
+   
+    const productIndex = cart.findIndex((item: any) => item.productName === product.productName);
+    
+    if (productIndex > -1) {
+      
+      cart[productIndex].quantity += 1;
+    } else {
+    
+      cart.push({ ...product, quantity: 1 });
+    }
+
+   
+    localStorage.setItem("carts", JSON.stringify(cart));
+    
+    
+    
+  };
   
   return (
     <div>
@@ -88,6 +160,11 @@ function page() {
                 <div>
                 <span className="text-[1em] font-poppins">{`MRP : ₹ ${items.price}`}</span>
                 </div>
+           
+<button onClick={() => addToCart(items)} className="py-2 bg-black text-white rounded-xl add-to-cart" data-id="product-id" data-name="product-name" data-image="product-image">
+  Add to Cart
+</button>
+
               </div>
           </div>
 
