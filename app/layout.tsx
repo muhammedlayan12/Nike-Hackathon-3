@@ -30,16 +30,16 @@
 
 
 
-import { Poppins } from "next/font/google";
+// import { Poppins } from "next/font/google";
 import { Metadata } from "next";
 import "./globals.css";
 
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "400", "700"],
-  variable: "--poppins",
-});
+// const poppins = Poppins({
+//   subsets: ["latin"],
+//   weight: ["100", "400", "700"],
+//   variable: "--poppins",
+// });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -52,10 +52,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={poppins.variable}>
+    <html lang="en" className="antialiased">
+      <head>
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" 
+          rel="stylesheet" 
+        />
+      </head>
       <body className="antialiased font-poppins">
         {children}
       </body>
     </html>
   );
+  
 }
