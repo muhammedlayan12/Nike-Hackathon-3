@@ -72,6 +72,8 @@ const [isProducts, setIsProducts] = useState<any[]>([]);
   const [isActiveColor, setIsActiveColor] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [isAlertShow, setIsAlertShow] = useState(false);
+  const [isError,setIsError] = useState(false);
+  const [isCart,setIsCart] = useState(false);
 
   
   const showResetAlert = () => {
@@ -87,9 +89,15 @@ const [isProducts, setIsProducts] = useState<any[]>([]);
       const query = `*[_type=="product"]{
           productName,category,price,inventory,colors,status,image,description
         }`;
-
-      const response = await client.fetch(query);
-      setIsProducts(response);
+try{
+  
+  const response = await client.fetch(query);
+  setIsProducts(response);
+  console.log(response);
+} catch(error){
+  setIsError(!isError)
+  
+}
     }
     getData();
   }, []);
@@ -115,7 +123,7 @@ const [isProducts, setIsProducts] = useState<any[]>([]);
  
   const addToCart = (product: any) => {
   
-    const cart = JSON.parse(localStorage.getItem("carts") || "[]");
+    const cart = JSON.parse(localStorage.getItem("cartItem") || "[]");
     
    
     const productIndex = cart.findIndex((item: any) => item.productName === product.productName);
@@ -129,11 +137,18 @@ const [isProducts, setIsProducts] = useState<any[]>([]);
     }
 
    
-    localStorage.setItem("carts", JSON.stringify(cart));
+    localStorage.setItem("cartItem", JSON.stringify(cart));
     
     
     
   };
+
+  function showCartAlert(){
+    setIsCart(!isCart);
+    setTimeout(()=>{
+      setIsCart(false)
+    },1500);  
+  }
   
   return (
     <div>
@@ -161,7 +176,7 @@ const [isProducts, setIsProducts] = useState<any[]>([]);
                 <span className="text-[1em] font-poppins">{`MRP : ₹ ${items.price}`}</span>
                 </div>
            
-<button onClick={() => addToCart(items)} className="py-2 bg-black text-white rounded-xl add-to-cart" data-id="product-id" data-name="product-name" data-image="product-image">
+<button onClick={() => {addToCart(items); showCartAlert()}} className="py-2 bg-black text-white rounded-xl add-to-cart" data-id="product-id" data-name="product-name" data-image="product-image">
   Add to Cart
 </button>
 
@@ -441,7 +456,7 @@ const [isProducts, setIsProducts] = useState<any[]>([]);
                className="font-poppins text-[0.9em] cursor-pointer hover:text-blue-500"
                onClick={() => setActiveCategory("Men's Training Shoes")}
              >
-               Men's Training Shoes
+               Men's Training 
              </li>
              <li
                className="font-poppins text-[0.9em] cursor-pointer hover:text-blue-500"
@@ -474,6 +489,27 @@ const [isProducts, setIsProducts] = useState<any[]>([]);
     <div className="ps-4 text-sm font-normal text-[#838383]">Filter Reset successfully.</div>
 </div>
 </section>
+<div className="flex justify-center m-auto">
+<div id="toast-simple" className={`${isError ? "top-20" : "top-[-100%]"} fixed top-20 justify-center transition-all duration-500   m-auto flex items-center w-full max-w-xs p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 dark:bg-gray-800`} role="alert">
+<div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
+        <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
+        </svg>
+        <span className="sr-only">Warning icon</span>
+    </div>
+    <div className="ps-4 text-sm font-normal">Failed To Fetch Products</div>
+</div>
+</div>
+
+
+<div className="m-auto flex justify-center">
+<div id="toast-simple" className={`${isCart ? "top-20" : "top-[-100%]"} transition-all m-auto duration-500 flex fixed top-20  items-center w-full max-w-xs p-4 space-x-4 rtl:space-x-reverse text-green-500 bg-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 dark:bg-gray-800`} role="alert">
+    <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+        </svg>
+    <div className="ps-4 text-sm font-normal text-[#838383]">Add To Cart Successfully</div>
+</div>
+</div>
 
   
         <Footer></Footer>
