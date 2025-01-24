@@ -10,6 +10,13 @@ import {Search,Heart,ShoppingBag,X} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../public/images/logo.png";
+import {
+    ClerkProvider,
+    SignInButton,
+    SignedIn,
+    SignedOut,
+    UserButton
+  } from '@clerk/nextjs';
 
 
 function Navbar() {
@@ -37,7 +44,7 @@ function Navbar() {
                 <li>
                     <Link className="text-[1em] font-poppins"  href="/login">Login</Link>
                 </li>
-                <li>
+                <li>    
                     <Link  className="text-[1em] font-poppins" href="/cart">Cart</Link>
                 </li>
                 <li>
@@ -49,6 +56,13 @@ function Navbar() {
                 <Search className=""/>
                 <Heart className="sm:block hidden"/>
                 <ShoppingBag className=" "/>
+                <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          <SignedIn >
+            <UserButton />
+          </SignedIn>
+          
             </div>
         </nav>
         <div className={`${isMenuOpen ? "translate-x-0" : "translate-x-[-100%]"} fixed sm:w-[250px] w-[90%] transition-all duration-500 bg-white z-[9999]  h-full top-0 bottom-0 left-0`}>

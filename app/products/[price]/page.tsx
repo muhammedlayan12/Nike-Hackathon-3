@@ -26,7 +26,7 @@
     function Data() {
       const [isProducts, setIsProducts] = useState<Product[]>([]);
       const [isError,setIsError] = useState(false);
-
+      const [isCart,setIsCart] = useState(false);
     
       const params = useParams(); 
       const price = params.price;
@@ -51,7 +51,28 @@
         getData();
       }, [price]);
       
-      
+      const addToCart = (product: any) => {
+  
+        const cart = JSON.parse(localStorage.getItem("cartItem") || "[]");
+        
+       
+        const productIndex = cart.findIndex((item: any) => item.productName === product.productName);
+        
+        if (productIndex > -1) {
+          
+          cart[productIndex].quantity += 1;
+        } else {
+        
+          cart.push({ ...product, quantity: 1 });
+        }
+    
+       
+        localStorage.setItem("cartItem", JSON.stringify(cart));
+        
+        
+        
+      };
+    
        
 
       return (
@@ -101,6 +122,7 @@
                 <button   className="flex ml-auto text-white bg-black border-0 py-2 px-6 focus:outline-none  rounded"  >
                   Add to Cart
                 </button>
+                
               </div>
             </div>
           </div>

@@ -33,6 +33,13 @@
 // import { Poppins } from "next/font/google";
 import { Metadata } from "next";
 import "./globals.css";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs';
 
 
 // const poppins = Poppins({
@@ -52,17 +59,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
+
     <html lang="en" className="antialiased">
       <head>
         <link 
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" 
           rel="stylesheet" 
-        />
+          />
       </head>
       <body className="antialiased font-poppins">
+      {/* <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn> */}
         {children}
       </body>
     </html>
+          </ClerkProvider>
   );
   
 }
