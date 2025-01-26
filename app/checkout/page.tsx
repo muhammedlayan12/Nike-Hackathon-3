@@ -1,11 +1,20 @@
+ 
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from "next/image";
 import img1 from "../../public/images/p1.png";
 import img2 from "../../public/images/p4.png";
+ 
 
 function CheckoutPage() {
+  
+
+  
+ 
+   
+ 
+   
   return (
     <div className="bg-gray-100 min-h-screen font-poppins">
       <Header />
@@ -73,7 +82,7 @@ function CheckoutPage() {
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-xl md:text-2xl font-bold mb-4">Order Summary</h2>
             <div className="mb-6">
-              <p className="text-sm sm:text-base">Subtotal: <span className="font-bold">₹ 20,890.00</span></p>
+              <p className="text-sm sm:text-base">Subtotal: <span className="font-bold">₹  20,890.00y</span></p>
               <p className="text-sm sm:text-base">Delivery/Shipping: <span className="font-bold">Free</span></p>
               <p className="text-sm sm:text-base">Total: <span className="font-bold">₹ 20,890.00</span></p>
               <small className="text-gray-500">
@@ -100,3 +109,4 @@ function CheckoutPage() {
 }
 
 export default CheckoutPage;
+  

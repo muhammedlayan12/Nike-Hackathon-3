@@ -92,7 +92,7 @@
       console.log(userId);
       if (!userId) return;
     
-      const cartKey = `cartItems_${userId}`;
+      const cartKey = `carts_${userId}`;
       const cart = JSON.parse(localStorage.getItem(cartKey) || "[]");
     
       const productIndex = cart.findIndex((item: any) => item.productName === product.productName);

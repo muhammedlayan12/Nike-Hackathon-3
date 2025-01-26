@@ -340,7 +340,7 @@
       if (typeof window !== "undefined") {
         const userId = user?.id; 
         if (userId) {
-          const cartKey = `cartItems_${userId}`;
+          const cartKey = `carts_${userId}`;
           const savedCart = localStorage.getItem(cartKey);
           if (savedCart) {
             setCartItems(JSON.parse(savedCart));
@@ -358,7 +358,7 @@
     
         const userId = user?.id;
         if (userId) {
-          const cartKey = `cartItems_${userId}`;
+          const cartKey = `carts_${userId}`;
           localStorage.setItem(cartKey, JSON.stringify(updatedCart));
         }
       } catch (error) {
