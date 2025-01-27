@@ -427,9 +427,17 @@
                   <p className="sm:text-[1em] text-[0.85em]">Total</p>
                   <span>{`$${calculateTotal().toFixed(2)}`}</span>
                 </div>
-                <Link href="/checkout" className="text-white bg-[#222] rounded-full py-2">
+                {/* <Link href="/checkout" className="text-white bg-[#222] rounded-full py-2">
                   Member Checkout
-                </Link>
+                </Link> */}
+                <Link
+  href="/checkout"
+  onClick={() => localStorage.setItem("checkoutCart", JSON.stringify(cartItems))}
+  className="text-white bg-[#222] rounded-full py-2"
+>
+  Member Checkout
+</Link>
+
               </div>
             </div>
           </div>

@@ -6,7 +6,7 @@
 
 
 import { useState } from "react";
-import {Search,Heart,ShoppingBag,X} from "lucide-react";
+import {Search,Heart,ShoppingBag,X,TrainTrack, MapPin} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../public/images/logo.png";
@@ -55,7 +55,8 @@ function Navbar() {
             <div className="flex sm:gap-8 gap-4">
                 <Search className=""/>
                 <Heart className="sm:block hidden"/>
-                <ShoppingBag className=" "/>
+                {/* <ShoppingBag className=" "/> */}
+                <MapPin/>
                 <SignedOut>
             <SignInButton />
           </SignedOut>
