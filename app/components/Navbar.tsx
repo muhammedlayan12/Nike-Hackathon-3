@@ -28,6 +28,7 @@ function Navbar() {
     }
   return (
     <div>
+        <Navbar></Navbar>
         <nav className="flex sm:justify-around font-poppins justify-between items-center py-2 px-4">
             <div className="lg:hidden block text-[1.4em] font-[400]" onClick={togglerNav}>☰</div>
             <Image src={logo} alt="Logo Nike"/>
@@ -57,6 +58,7 @@ function Navbar() {
                 <Heart className="sm:block hidden"/>
                 {/* <ShoppingBag className=" "/> */}
                 <MapPin/>
+                <Link href="/tracking"></Link>
                 <SignedOut>
             <SignInButton />
           </SignedOut>

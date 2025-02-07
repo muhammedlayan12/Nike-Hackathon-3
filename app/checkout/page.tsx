@@ -844,7 +844,7 @@ function CheckoutPage() {
             </p>
 
             <form onSubmit={handleSubmit}>
-              <h3 className="text-lg font-semibold mb-4">Enter your name and address:</h3>
+              <h3 className="text-lg font-semibold mb-4">Enter your name and addresss:</h3>
               <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <input
                   type="text"
